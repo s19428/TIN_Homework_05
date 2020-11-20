@@ -1,0 +1,67 @@
+<script>
+    function Student(firstName, lastName, id, gradesArray)
+    {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.id = id;
+        this.gradesArray = gradesArray;
+
+        this.printStudentData = function()
+        {
+            console.log("firstName: " + firstName);
+            console.log("lastName: " + lastName);
+            var gradeAverage = this.getAverageGrade();
+            console.log("gradeAverage: " + gradeAverage);
+        }
+
+        this.setGradesArray = function(_gradesArray)
+        { this.gradesArray = _gradesArray; }
+        this.setFirstName = function(_firstName)
+        { this.firstName = _firstName; }
+        this.setLastName = function(_lastName)
+        { this.lastName = _lastName; }
+        this.getFirstName = function()
+        { return this.firstName; }
+        this.getLastName = function()
+        { return this.lastName; }
+        this.getAverageGrade = function()
+        { 
+            var gradeAverage = 0;
+            var counter = 0;
+            for(var grade in this.gradesArray)
+            {
+                gradeAverage += grade;
+                counter++;
+            }
+            gradeAverage = gradeAverage / counter;
+            return gradeAverage;
+        }
+    }
+
+    Student.prototype.listOfCourses = ["Course1", "Course2"];
+
+    function createStudents(numberOfStudents)
+    {
+        var students = new Array(numberOfStudents);
+        for(i = 0; i < numberOfStudents; i++)
+        {
+            var name = "name" + i;
+            var surname = "suranme" + i;
+            students[i] = new Student(name, surname, i, null);
+
+            //console.log("student created: ");
+            students[i].printStudentData();
+            //console.log("listOfCources: " + students[i].listOfCourses);
+        }
+
+        return students;
+    }
+
+    var students = createStudents(3);
+    students[0].setGradesArray([5, 4, 3]);
+    console.log(students[0].getAverageGrade());
+    students[0].setFirstName("changedName");
+    students[0].setLastName("changedSurname");
+    students[0].printStudentData();
+
+</script>

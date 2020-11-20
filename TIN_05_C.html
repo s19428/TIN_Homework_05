@@ -1,0 +1,45 @@
+<script>
+    function Student(firstName, lastName, id, gradesArray)
+    {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.id = id;
+        this.gradesArray = gradesArray;
+
+        this.printStudentData = function()
+        {
+            console.log("firstName: " + firstName);
+            console.log("lastName: " + lastName);
+            var gradeAverage = 0;
+            var counter = 0;
+            for(var grade in this.gradesArray)
+            {
+                gradeAverage += grade;
+                counter++;
+            }
+            gradeAverage = gradeAverage / counter;
+            console.log("gradeAverage: " + gradeAverage);
+        }
+    }
+
+    Student.prototype.listOfCourses = ["Course1", "Course2"];
+
+    function createStudents(numberOfStudents)
+    {
+        var students = new Array(numberOfStudents);
+        for(i = 0; i < numberOfStudents; i++)
+        {
+            var name = "name" + i;
+            var surname = "suranme" + i;
+            students[i] = new Student(name, surname, i, null);
+
+            console.log("student created: ");
+            students[i].printStudentData();
+            console.log("listOfCources: " + students[i].listOfCourses);
+        }
+
+        return students;
+    }
+
+    createStudents(3);
+</script>
