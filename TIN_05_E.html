@@ -1,0 +1,67 @@
+<script>
+    class Student{
+
+        constructor(firstName, lastName, id, gradesArray)
+        {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.id = id;
+            this.gradesArray = gradesArray;
+        }
+
+        set setFirstName(firstName){ this.firstName = firstName; }
+        set setLastName(lastName){ this.lastName = lastName; }
+        set setGradesArray(gradesArray){ this.gradesArray = gradesArray; }
+        get getFirstName(){ return this.firstName; }
+        get getLastName(){ return this.lastName; }
+        get getAverageGrade()
+        {
+            var gradeAverage = 0;
+            var counter = 0;
+            for(var grade in this.gradesArray)
+            {
+                gradeAverage += grade;
+                counter++;
+            }
+            gradeAverage = gradeAverage / counter;
+            return gradeAverage;
+        }
+
+
+        printStudentData ()
+        {
+            console.log("firstName: " + this.firstName);
+            console.log("lastName: " + this.lastName);
+            var gpa = this.getAverageGrade;
+            console.log("gradeAverage: " + gpa);
+        }
+    }
+
+    Student.prototype.listOfCourses = ["Course1", "Course2"];
+
+    function createStudents(numberOfStudents)
+    {
+        var students = new Array(numberOfStudents);
+        for(i = 0; i < numberOfStudents; i++)
+        {
+            var name = "name" + i;
+            var surname = "suranme" + i;
+            students[i] = new Student(name, surname, i, null);
+
+            console.log("student created: ");
+            students[i].printStudentData();
+            console.log("listOfCources: " + students[i].listOfCourses);
+        }
+
+        return students;
+    }
+
+    var students = createStudents(3);
+    var firstStudent = students[0];
+    firstStudent.setFirstName = "changedName";
+    firstStudent.setLastName = "changedLastName";
+    firstStudent.setGradesArray = [4, 5, 3];
+
+    firstStudent.printStudentData();
+    console.log("Students average grade: " + firstStudent.getAverageGrade);
+</script>
